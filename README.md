@@ -6,9 +6,7 @@ This document presents and defines object types and verbs for Activity streams i
 ## Verbs
 | Verb |Description   |  Example |
 |---|---|---|
-| check-in  |  
-Indicates that the actor has checked-in with the object. For example, a person checks in with a piece of exercise equipment to indicate they are using the equipment.
- | {
+| check-in  |Indicates that the actor has checked-in with the object. For example, a person checks in with a piece of exercise equipment to indicate they are using the equipment.|{
 "actor": {
     "objectType": "person",
     "displayName": "Ricky" },
@@ -17,7 +15,7 @@ Indicates that the actor has checked-in with the object. For example, a person c
     "objectType": "equipment",
     "displayName": "Treadmill" },
   "title": "Ricky is checked in to the treadmill."
-  }  |
+  }|
 |  
 check-out |
 Indicates that the actor has checked-out with the object. For example, a person checks out with the piece of exercise equipment to indicate they are not using the equipment. |
