@@ -52,11 +52,12 @@ Indicates that the actor recommends itself to the object. For example, a treadmi
     "displayName": "Treadmill" },
   "verb": "recommend",
   "object": {
+    “id”: “02”,
     "objectType": "person",
     "displayName": "Ricky"}
   "recommendation" :{
     object:{
-        “id”: “02”,
+        “id”: “03”,
         “objectType”: “equipment”,
         “displayName”: Treadmill
     }
