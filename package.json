@@ -1,0 +1,20 @@
+{
+  "name": "iot-smart-gym",
+  "version": "1.0.0",
+  "description": "Setting up activity streams and a simple HTTP Server",
+  "main": "server.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --reporter spec"
+  },
+  "author": "ayyrickay",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.4",
+    "twilio": "^2.9.1"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5",
+    "restler": "^3.4.0"
+  }
+}
