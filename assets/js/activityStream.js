@@ -1,31 +1,63 @@
 "use strict";
 
-var exports = module.exports = {
-  publishASBaseData: function publishASBaseData() {
-
-    // Create ActivityStream (corresponds to the example in the ASBase API Doc)
-    var asData = {};
-  }
+//Checks whether an input is a JSON
+exports.checkJSON = function(object){
+  return _checkJSON(object);
 }
 
-var asBaseURL = 'http://russet.ischool.berkeley.edu:8080';
-
-//JOB: Builds ASBase Data for activity streams
-exports.ASBuilder = function(actor, verb, object){
-  var asData = {
-    "actor": actor,
-    "verb" : verb,
-    "object": object
+var _checkJSON = function(object){
+  try{
+    return JSON.parse(object);
+  } catch (e){
+    //invalid JSON input, return null
+    return e;
   }
-
-  return asData
 };
 
-//JOB: publishes an event to ASBase
-function publishEvent(asData, asBaseURL) {
+//Indicates that the actor has checked-in with the object. For example, a person checks in with a piece of exercise equipment to indicate they are using the equipment.
+exports.checkInToEquipment = function(actor, object){
+  var asData = {
+      "actor": _checkJSON(actor),
+        "verb": "check-in",
+        "object": _checkJSON(object),
+      };
 
-  // Load restler library for HTTP requests
+      console.log(asData);
+      publishEvent(asData);
+}
+
+//Indicates that the actor has checked-out with the object. For example, a person checks out with the piece of exercise equipment to indicate they are not using the equipment. Also includes duration (in MINUTES).
+exports.checkOutOfEquipment = function(actor, object){
+  var asData = {
+      "actor": _checkJSON(actor),
+        "verb": "check-out",
+        "object": _checkJSON(object),
+        "duration": "12" //in minutes; will eventually be programmatically determined through database
+      };
+
+      console.log(asData);
+      publishEvent(asData);
+}
+
+//Indicates that equipment recommends itself to the object. For example, a treadmill will recommend itself to a person who needs cardio.
+exports.recommend = function(actor, object, recommendation){
+  var asData = {
+      "actor": _checkJSON(actor),
+        "verb": "check-in",
+        "object": _checkJSON(object),
+        "recommendation": _checkJSON(recommendation)
+      };
+
+      console.log(asData);
+      publishEvent(asData);
+}
+
+//JOB: sets us up to publish events
+function publishEvent(asData) {
+
+  // Load restler library for HTTP requests, and store ASBase URL
   var rest = require('restler');
+  var asBaseURL = 'http://russet.ischool.berkeley.edu:8080';
 
   // Log message
   console.log('Publishing: ' + JSON.stringify(asData));
@@ -41,7 +73,7 @@ function publishEvent(asData, asBaseURL) {
       'Content-Type': 'application/stream+json'
     }
 
-  }).on('compvare', function(data, response) {
+  }).on('compare', function(data, response) {
 
     // Check that the correct response code was received
     if (response.statusCode === 200) {
