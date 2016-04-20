@@ -20,20 +20,27 @@ app.get('/user/:user-id', function(req, res){
 
 });
 
-app.put('/checkin', function(req, res, next){
-  as.publishASBaseData();
+//will eventually need to be a PUT
+app.get('/checkin/', function(req, res, next){
+  var actor = '{"id": "01", "objectType": "person", "displayName": "Ricky" }'
+  var object = '{"id":"02", "objectType": "equipment", "displayName": "Treadmill" }'
+  as.checkInToEquipment(actor, object);
   next();
 }, function(req, res){
   res.send("You're now using equipment.");
 });
 
-app.put('/checkout', function(req, res, next){
-  as.publishASBaseData();
+//will eventually need to be a PUT
+app.get('/checkout', function(req, res, next){
+  var actor = '{"id": "01", "objectType": "person", "displayName": "Ricky" }'
+  var object = '{"id":"02", "objectType": "equipment", "displayName": "Treadmill" }'
+  as.checkOutOfEquipment(actor, object);
   next();
 }, function(req, res){
-  res.send("You're now using equipment.");
+  res.send("You're no longer using equipment.");
 });
 
+//should eventually be a post
 app.get('/recommendation/:equipmentID', function(req, res){
   var equipmentID = req.params.equipmentID;
   twilioSend(equipmentID);
@@ -48,12 +55,14 @@ app.listen(8080, function(){
 //JOB: Sends a Twilio message
 var twilioSend = function(equipmentID){
   // Twilio Credentials
+  var accountSid = 'your twilio account SID';
+  var authToken = 'your twilio auth token'; 
 
   //require the Twilio module and create a REST client
   var client = require('twilio')(accountSid, authToken);
 
   client.messages.create({
-    to: "2488601880",
+    to: "2034195722",
   	from: "+18604106213",
   	body: "Try using equipment " + equipmentID + " 💪",
   }, function(err, message) {
