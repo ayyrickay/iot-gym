@@ -12,10 +12,10 @@ var exports = module.exports = {
 //JOB: Builds ASBase Data for activity streams
 exports.checkJSON = function(object){
   try{
-    JSON.parse(object);
+    return JSON.parse(object);
   } catch (e){
     //invalid JSON input, return null
-    return null;
+    return e;
   }
 };
 
