@@ -17,3 +17,11 @@ describe('A JSON should return itself', function(){
     assert.isOk(as.checkJSON(x), 'valid JSON');
   })
 })
+
+describe('Check in Equipment function should not error', function(){
+  it("returns a status code of 200 when a person checks in to an object", function(){
+    var actor = '{"id": "01", "objectType": "person", "displayName": "Ricky" }'
+    var object = '{"id":"02", "objectType": "equipment", "displayName": "Treadmill" }'
+    assert.isOk(as.checkInToEquipment(actor, object), 'doesnt error');
+  })
+})
