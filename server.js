@@ -4,6 +4,7 @@ var as = require('./assets/js/activityStream');
 var app = express();
 app.use(express.static(__dirname + '/view'));
 app.use(express.static(__dirname + '/assets'));
+
 //respond to get request with Hello World
 app.get('/', function(req, res){
   res.sendFile('index.html');
@@ -42,7 +43,10 @@ app.get('/checkout', function(req, res, next){
 
 //should eventually be a post
 app.get('/recommendation/:equipmentID', function(req, res){
+  var actor = '{"id": "01", "objectType": "person", "displayName": "Ricky" }'
+  var object = '{"id":"02", "objectType": "equipment", "displayName": "Treadmill" }'
   var equipmentID = req.params.equipmentID;
+  as.recommend(object, actor, object);
   twilioSend(equipmentID);
   console.log("Equipment ID is:", equipmentID);
   res.send("Ugh");
@@ -52,11 +56,11 @@ app.listen(8080, function(){
   console.log("listening on port 8080");
 });
 
-//JOB: Sends a Twilio message
+//JOB: Understands how to send a Twilio message
 var twilioSend = function(equipmentID){
   // Twilio Credentials
-  var accountSid = 'your twilio account SID';
-  var authToken = 'your twilio auth token'; 
+  var accountSid = 'AC72ed7e759a0cef60f240c4ed3b801b56';
+  var authToken = 'bc93c44531bd20865be0fe2bed97b2eb';
 
   //require the Twilio module and create a REST client
   var client = require('twilio')(accountSid, authToken);
