@@ -1,0 +1,70 @@
+Mongo DB Script ----
+
+Step 1 - Installation for Mac
+
+1. Download the .tgz file from "https://www.mongodb.org/downloads"
+
+2. Open terminal and navigate to Downloads
+
+3. sudo tar -zxvf mongodb-osx-x86_64-3.2.5.tgz
+
+4. mkdir -p mongodb
+
+5. cp -R -n mongodb-osx-x86_64-3.2.5/ mongodb
+
+
+Step 2 - Setting up permissions
+
+1. Navigate to root - Execute "cd " (without the quotes)
+
+2. vi .bash_profile
+
+3.  Add this line: export PATH=<mongodb-install-directory>/bin:$PATH 
+	
+	Replacing the  <mongodb-install-directory> with the path to the extracted MongoDB archive (the mongodb folder we created before)
+
+4. Press ESC  and type ":wq!" without the quotes and hit Enter
+
+5. mkdir -p /data/db
+
+6. sudo chmod -R 777 /data/db
+
+7. Go to root - Execute  "cd /" without the quotes
+
+8. Execute <path to binary>/mongod
+	
+	<path to binary> is "<mongodb-install-directory>/bin"
+
+
+-- YOU SHOULD SEE A "WAITING FOR CONNECTION" PROMPT AT THE LAST OF THE SCREEN. THIS MEANS THAT THE MONGO DB IS UP AND RUNNING.
+
+
+NEXT STEPS
+
+Step 3 - Creating Databases, and records
+
+1. Open a new terminal and DO NOT close the previous terminal
+
+2. Run <mongodb-install-directory>/bin/mongo
+
+3. Create a database - Execute  "use test_db", where test_db is the database name.
+	test successful creation of database by executing "db". This shall print the name of the database, in this case "test_db"
+
+4. Create a collection - Collection is the equivalent of tables in Mongo
+	db.createCollection("users")
+	db.createCollection("equipment")
+	db.createCollection("usageDetails")
+
+5. insert documents - Documents are the equivalent of rows.
+	db.users.insert({id: 01, objectType: "person", displayName: "Ricky"})
+	db.users.insert({id: 02, objectType: "person", displayName: "Anne"})
+	db.users.insert({id: 03, objectType: "person", displayName: "Rebecca"})
+	db.users.insert({id: 04, objectType: "person", displayName: "Ankur"})
+
+	db.equipment.insert ({id: 01, objectType: "equipment", displayName: "TreadMill"})
+
+--AND WE ARE DONE
+
+NOTE - In case you get an Incorrect syntax error or anything similar to that, make sure that all the quotes that
+are used in the code are straight quotes, like this "", and not curved quotation marks as we usually write. This might happen if 
+you copy and paste the above code into some text editor before trying to execute it.
