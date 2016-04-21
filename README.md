@@ -13,10 +13,12 @@ Indicates that the actor has checked-in with the object. For example, a person c
 ```
 {
 "actor": {
+    "id": "01",
     "objectType": "person",
     "displayName": "Ricky" },
   "verb": "check-in",
   "object": {
+    “id”: “02”,
     "objectType": "equipment",
     "displayName": "Treadmill" },
   "title": "Ricky is checked in to the treadmill."
@@ -24,17 +26,20 @@ Indicates that the actor has checked-in with the object. For example, a person c
 ```
   
 ### check-out
-Indicates that the actor has checked-out with the object. For example, a person checks out with the piece of exercise equipment to indicate they are not using the equipment.
+Indicates that the actor has checked-out with the object. For example, a person checks out with the piece of exercise equipment to indicate they are not using the equipment. Also includes duration (in MINUTES).
 ```
 {
 "actor": {
+    “id”: “01”,
     "objectType": "person",
     "displayName": "Ricky" },
   "verb": "check-out",
   "object": {
+    “id”: “02”,
     "objectType": "equipment",
     "displayName": "Treadmill" },
-  "title": "Ricky is checked out of the Treadmill."
+  "title": "Ricky is checked out of the Treadmill.",
+  "duration": "12"
   }
 ```
 
@@ -43,16 +48,19 @@ Indicates that the actor recommends itself to the object. For example, a treadmi
 ```
 {
 "actor": {
+    “id”: “01”,
     "objectType": "equipment",
     "displayName": "Treadmill" },
   "verb": "recommend",
   "object": {
+    “id”: “02”,
     "objectType": "person",
     "displayName": "Ricky"}
   "recommendation" :{
     object:{
-      “objectType”: “equipment”,
-      “displayName”: Treadmill
+        “id”: “03”,
+        “objectType”: “equipment”,
+        “displayName”: Treadmill
     }
   }
 }
@@ -72,7 +80,7 @@ A suggested object for another actor
 
 
 ### displayName
-The natural-language, human-readable and plain-text keyword or phrase describing the mood. HTML markup MUST NOT be included.
+The natural-language, human-readable and plain-text keyword or phrase identifying the actor. HTML markup MUST NOT be included.
 
 This property has the type `String`.
 
