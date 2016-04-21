@@ -18,11 +18,10 @@ var _checkJSON = function(object){
 exports.checkInToEquipment = function(actor, object){
   var asData = {
       "actor": _checkJSON(actor),
-        "verb": "check-in",
-        "object": _checkJSON(object),
+      "verb": "check-in",
+      "object": _checkJSON(object),
       };
 
-      console.log(asData);
       publishEvent(asData);
 }
 
@@ -35,7 +34,6 @@ exports.checkOutOfEquipment = function(actor, object){
         "duration": "12" //in minutes; will eventually be programmatically determined through database
       };
 
-      console.log(asData);
       publishEvent(asData);
 }
 
@@ -43,12 +41,11 @@ exports.checkOutOfEquipment = function(actor, object){
 exports.recommend = function(actor, object, recommendation){
   var asData = {
       "actor": _checkJSON(actor),
-        "verb": "check-in",
-        "object": _checkJSON(object),
-        "recommendation": _checkJSON(recommendation)
+      "verb": "recommend",
+      "target": _checkJSON(recommendation),
+      "object": _checkJSON(object)
       };
 
-      console.log(asData);
       publishEvent(asData);
 }
 
@@ -57,14 +54,15 @@ function publishEvent(asData) {
 
   // Load restler library for HTTP requests, and store ASBase URL
   var rest = require('restler');
-  var asBaseURL = 'http://russet.ischool.berkeley.edu:8080';
+  var asBaseURL = 'http://russet.ischool.berkeley.edu:8080/activities';
 
   // Log message
+  console.log('-------------------');
   console.log('Publishing: ' + JSON.stringify(asData));
+  console.log('-------------------');
 
   // Post AS to ASbase
   rest.post(asBaseURL, {
-
     // Specify data that should be sent to the broker - the ActivityStream
     data: JSON.stringify(asData),
 
@@ -72,7 +70,6 @@ function publishEvent(asData) {
     headers: {
       'Content-Type': 'application/stream+json'
     }
-
   }).on('compare', function(data, response) {
 
     // Check that the correct response code was received
