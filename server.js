@@ -82,25 +82,3 @@ app.get('/recommendation/:equipmentName', function(req, res){
 app.listen(8080, function() {
   console.log('Listening on port 8080...')
 })
-
-//Understands how to send a Twilio message
-var twilioSend = function(equipment){
-  // Twilio Credentials
-  var accountSid = 'ACad714a0a65996e30150a5ba4978a9c2c';
-  var authToken = '151ae41146a9d6f91ec1377c146cfa89';
-
-  var bodyString = "Try using the " + equipment.equipmentType + " " + equipment.name + " so you can work on your " + equipment.workoutType + " 💪"
-
-  console.log(bodyString)
-
-  //require the Twilio module and create a REST client
-  var client = require('twilio')(accountSid, authToken);
-
-  client.messages.create({
-    to: "2488601880",
-  	from: "+16507535354",
-  	body: "Your flexibility is on point? There's always room for improvement, tho. 💅"
-  }, function(err, message) {
-  	console.log(message.sid);
-  });
-}
