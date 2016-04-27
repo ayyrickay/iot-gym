@@ -1,4 +1,5 @@
 "use strict";
+var createSubscriptions = require('./createSubscription.js')
 
 //Checks whether an input is a JSON
 exports.checkJSON = function(object){
@@ -47,6 +48,10 @@ exports.recommend = function(actor, object, recommendation){
       };
 
       publishEvent(asData);
+}
+
+exports.handleEvent = function(eventInJSON) {
+  console.log("Processing event: " + JSON.stringify(eventInJSON));
 }
 
 //JOB: sets us up to publish events
