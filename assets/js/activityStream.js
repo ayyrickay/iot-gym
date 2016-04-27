@@ -1,4 +1,20 @@
 "use strict";
+var subscriptions = require('./subscriptions.js');
+
+// *********************
+// Understands how to subscribe to ASBase events
+// *********************
+
+// Handle the published AS
+function handleEvent(eventInJSON) {
+	console.log("Processing event: " + JSON.stringify(eventInJSON));
+}
+
+subscriptions.create(handleEvent)
+
+// *********************
+// Understands how to publish events to ASBase
+// *********************
 
 //Checks whether an input is a JSON
 exports.checkJSON = function(object){

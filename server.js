@@ -14,6 +14,13 @@ app.get('/', function(req, res){
   res.sendFile('index.html');
 });
 
+app.post("/", function(req, res) {
+  console.log('****************');
+  console.log("Processing event: " + JSON.stringify(req.body));
+  console.log('****************');
+  res.send("Thanks!");
+});
+
 //Get the pages for specific equipment
 app.get('/equipment/:equipmentName', function(req, res){
   var equipmentName = req.params.equipmentName;
