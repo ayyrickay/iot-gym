@@ -29,21 +29,20 @@ exports.checkInToEquipment = function(actor, object){
 exports.checkOutOfEquipment = function(actor, object){
   var asData = {
       "actor": _checkJSON(actor),
-        "verb": "check-out",
-        "object": _checkJSON(object),
-        "duration": "12" //in minutes; will eventually be programmatically determined through database
+      "verb": "check-out",
+      "object": _checkJSON(object),
       };
 
       publishEvent(asData);
 }
 
 //Indicates that equipment recommends itself to the object. For example, a treadmill will recommend itself to a person who needs cardio.
-exports.recommend = function(actor, object, recommendation){
+exports.recommend = function(actor, object, target){
   var asData = {
       "actor": _checkJSON(actor),
       "verb": "recommend",
-      "target": _checkJSON(recommendation),
-      "object": _checkJSON(object)
+      "object": _checkJSON(object),
+      "target": _checkJSON(target)
       };
 
       publishEvent(asData);
