@@ -3,18 +3,23 @@
   "version": "1.0.0",
   "description": "Setting up activity streams and a simple HTTP Server",
   "main": "server.js",
+  "repository": "https://github.com/ayyrickay/iot-gym.git",
   "scripts": {
-    "test": "./node_modules/.bin/mocha --reporter spec"
+    "test": "mocha --recursive"
   },
   "author": "ayyrickay",
   "license": "ISC",
   "dependencies": {
+    "async": "^1.5.2",
     "express": "^4.13.4",
+    "mongodb": "^2.1.16",
+    "request": "^2.72.0",
+    "restler": "^3.4.0",
     "twilio": "^2.9.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",
     "mocha": "^2.4.5",
-    "restler": "^3.4.0"
+    "should": "^8.3.1"
   }
 }

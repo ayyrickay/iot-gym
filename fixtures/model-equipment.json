@@ -1,0 +1,21 @@
+{
+  "collections": {
+    "equipment": [
+      {
+        "equipmentType": "Treadmill",
+        "workoutType": "Cardio",
+        "inUse": false
+      },
+      {
+        "equipmentType": "Squat Rack",
+        "workoutType": "Strength",
+        "inUse": false
+      },
+      {
+        "equipmentType": "Yoga Mat",
+        "workoutType": "Flexibility",
+        "inUse": false
+      }
+    ]
+  }
+}
