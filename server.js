@@ -1,7 +1,8 @@
 var express = require('express');
 var as = require('./assets/js/activityStream');
 
-var equipment = require('./models/equipment')
+var equipment = require('./models/equipment');
+var twilio = require('./models/twilio');
 
 var app = express();
 
@@ -37,7 +38,7 @@ app.post('/checkin/:equipmentName', function(req, res, next){
 
   equipmentASObject = {"id": req.route.path + "/" + equipmentInfo._id, "objectType": "equipment", "displayName": equipmentInfo.name }
 
-  var object = toString(equipmentASObject)
+  var object = JSON.stringify(equipmentASObject)
   var actor = '{"id":"007", "objectType": "person", "displayName": "Ricky" }'
   as.checkInToEquipment(actor, object);
   next();
@@ -51,12 +52,14 @@ app.get('/checkout/:equipmentName', function(req, res, next){
   var equipmentName = req.params.equipmentName;
   var equipmentInfo = equipment.find(equipmentName);
 
+  equipmentASObject = {"id": req.route.path + "/" + equipmentInfo._id, "objectType": "equipment", "displayName": equipmentInfo.name }
+
   equipment.toggleState(equipmentInfo)
 
 
 
   var actor = '{"id": "007", "objectType": "person", "displayName": "Ricky" }';
-  var object = toString(equipmentASObject);
+  var object = JSON.stringify(equipmentASObject);
 
   as.checkOutOfEquipment(actor, object);
   next();
@@ -70,13 +73,14 @@ app.get('/recommendation/:equipmentName', function(req, res){
   var equipmentName = req.params.equipmentName;
   var equipmentInfo = equipment.find(equipmentName);
 
-  var actor = '{"id": "01", "objectType": "person", "displayName": "Ricky" }';
-  var object = toString({"id": __dirname + equipmentInfo._id, "objectType": "equipment", "displayName": equipmentInfo.name });
+  var actor = JSON.stringify({"id": "007", "objectType": "person", "displayName": "Ricky" });
+  var object = JSON.stringify({"id": __dirname + equipmentInfo._id, "objectType": "equipment", "displayName": equipmentName });
+  var target = JSON.stringify({"objectType": "event", "displayName": "workout"})
 
-  as.recommend(object, actor, object);
-  twilioSend(equipmentInfo);
+  as.recommend(object, actor, target);
+  twilio.send(equipmentInfo);
   console.log("Equipment ID is:", equipmentInfo._id);
-  res.send("Equipment recommended");
+  res.send("Recommended " + equipmentInfo.name);
 });
 
 app.listen(8080, function() {

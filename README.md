@@ -24,7 +24,7 @@ Indicates that the actor has checked-in with the object. For example, a person c
   "title": "Ricky is checked in to the treadmill."
   }
 ```
-  
+
 ### check-out
 Indicates that the actor has checked-out with the object. For example, a person checks out with the piece of exercise equipment to indicate they are not using the equipment. Also includes duration (in MINUTES).
 ```
@@ -56,12 +56,9 @@ Indicates that the actor recommends itself to the object. For example, a treadmi
     “id”: “02”,
     "objectType": "person",
     "displayName": "Ricky"}
-  "recommendation" :{
-    object:{
-        “id”: “03”,
-        “objectType”: “equipment”,
-        “displayName”: Treadmill
-    }
+  "target" :{
+    “objectType”: "event",
+    “displayName”: "Workout"
   }
 }
 ```
