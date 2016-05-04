@@ -100,7 +100,7 @@ app.post('/recommendation/:equipmentName', function (req, res) {
     'displayName': 'Ricky'
   })
   var object = JSON.stringify({
-    'id': __dirname.join(equipmentInfo._id),
+    'id': path.join(__dirname + equipmentInfo._id),
     'objectType': 'equipment',
     'displayName': equipmentName
   })
