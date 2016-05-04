@@ -1,7 +1,7 @@
 var request = require('request')
 
 var asBaseURL = 'http://russet.ischool.berkeley.edu:8080'
-var callbackURL = 'http://10.0.0.130:8080/recommendation/plato'
+var callbackURL = 'https://warm-reaches-30975.herokuapp.com/recommendation/socrates'
 
 var userName = 'iotGym'
 var subscriptionID = 'gymSubscription'
