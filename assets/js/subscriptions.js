@@ -1,7 +1,7 @@
 var request = require('request')
 
 var asBaseURL = 'http://russet.ischool.berkeley.edu:8080'
-var callbackURL = 'http://10.0.0.130:8080/recommendation/plato'
+var callbackURL = 'http://2601:644:200:8514:a0e2:f7a8:5df2:93f2:8080/recommendation/plato'
 
 var userName = 'iotGym'
 var subscriptionID = 'gymSubscription'

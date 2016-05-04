@@ -88,8 +88,8 @@ app.post('/checkout/:equipmentName', function (req, res, next) {
 })
 
 // Recommends equipment to people
-// TODO: should eventually be a post, handled by some kind of database logic
 app.post('/recommendation/:equipmentName', function (req, res) {
+  console.log(req)
   var equipmentName = req.params.equipmentName
   var equipmentInfo = equipment.find(equipmentName)
 
@@ -114,6 +114,6 @@ app.post('/recommendation/:equipmentName', function (req, res) {
   res.send('Recommended ' + equipmentInfo.name)
 })
 
-app.listen(8080, function () {
+app.listen(8080, '10.0.0.130', function () {
   console.log('Listening on port 8080...')
 })
