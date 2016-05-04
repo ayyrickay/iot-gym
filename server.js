@@ -37,7 +37,7 @@ app.get('/equipment/:equipmentName', function (req, res) {
   console.log('equipment info is: ' + JSON.stringify(equipmentInfo))
   console.log(req.originalUrl)
 
-  res.render('equipment.html', { name: equipmentName })
+  res.render('equipment.html', { name: equipmentName, equipmentType: equipmentInfo.equipmentType })
 })
 
 // User profiles

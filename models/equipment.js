@@ -1,5 +1,5 @@
-//Understands how to use equipment objects
-//TODO: idk, turn this into a database I guess
+// Understands how to use equipment objects
+// TODO: idk, turn this into a database I guess
 var equipment = [
   { _id: 123, name: "plato", equipmentType: "treadmill", workoutType: "cardio", inUse: false },
   { _id: 234, name: "aristotle", equipmentType: "squat rack", workoutType: "strength", inUse: false },
