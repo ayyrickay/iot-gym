@@ -6,7 +6,7 @@
   "repository": "https://github.com/ayyrickay/iot-gym.git",
   "scripts": {
     "test": "mocha --recursive",
-    "start": "npm install & node server.js"
+    "start": "node server.js"
   },
   "author": "ayyrickay",
   "license": "ISC",
