@@ -3,7 +3,7 @@ var request = require('request')
 var asBaseURL = 'http://russet.ischool.berkeley.edu:8080'
 var callbackURL = 'https://warm-reaches-30975.herokuapp.com/'
 
-var userName = 'iotGym'
+var userName = 'iotGym-1'
 var subscriptionID = 'gymSubscription'
 
 var asBaseUsersURL = asBaseURL + '/users'
@@ -50,7 +50,7 @@ function handleUserCreationResponse (error, response, body) {
       subscriptionID: subscriptionID,
       ASTemplate: {
         'verb': {
-          '$in': ['check-in']
+          '$in': ['publish']
         }
       }
     }
