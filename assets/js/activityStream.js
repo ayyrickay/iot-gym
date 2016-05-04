@@ -68,7 +68,7 @@ exports.recommend = function (actor, object, target) {
 function publishEvent (asData) {
   // Load restler library for HTTP requests, and store ASBase URL
   var rest = require('restler')
-  var asBaseURL = 'http:// russet.ischool.berkeley.edu:8080/activities'
+  var asBaseURL = 'http://russet.ischool.berkeley.edu:8080/activities'
 
   // Log message
   console.log('-------------------')

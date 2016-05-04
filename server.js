@@ -1,4 +1,6 @@
 var express = require('express')
+var path = require('path')
+var mustacheExpress = require('mustache-express')
 var as = require('./assets/js/activityStream')
 
 var equipment = require('./models/equipment')
@@ -6,8 +8,13 @@ var twilio = require('./models/twilio')
 
 var app = express()
 
-app.use(express.static(__dirname + '/view'))
-app.use(express.static(__dirname + '/assets'))
+app.engine('html', mustacheExpress())
+
+app.set('view engine', 'html')
+app.set('views', path.join(__dirname + '/view'))
+
+app.use(express.static(path.join(__dirname + '/view')))
+app.use(express.static(path.join(__dirname + '/assets')))
 
 // respond to get request with index file - shows all equipment
 app.get('/', function (req, res) {
@@ -29,7 +36,7 @@ app.get('/equipment/:equipmentName', function (req, res) {
   console.log('equipment info is: ' + JSON.stringify(equipmentInfo))
   console.log(req.originalUrl)
 
-  res.sendFile(__dirname + '/view/equipment.html')
+  res.render('equipment.html', { name: equipmentName })
 })
 
 // User profiles
@@ -43,23 +50,31 @@ app.post('/checkin/:equipmentName', function (req, res, next) {
 
   equipment.toggleState(equipmentInfo)
 
-  var equipmentASObject = {'id': req.route.path + '/' + equipmentInfo._id, 'objectType': 'equipment', 'displayName': equipmentInfo.name }
+  var equipmentASObject = {
+    'id': req.route.path + '/' + equipmentInfo._id,
+    'objectType': 'equipment',
+    'displayName': equipmentInfo.name
+  }
 
   var object = JSON.stringify(equipmentASObject)
   var actor = '{"id":"007", "objectType" : "person", "displayName" : " Ricky" }'
   as.checkInToEquipment(actor, object)
   next()
 }, function (req, res) {
-  res.send('You are now using equipment.')
+  res.render('in_use.html', { name: req.params.equipmentName })
 })
 
 // Checks out of equipment
 // TODO: will eventually need to be a PUT
-app.get('/checkout/:equipmentName', function (req, res, next) {
+app.post('/checkout/:equipmentName', function (req, res, next) {
   var equipmentName = req.params.equipmentName
   var equipmentInfo = equipment.find(equipmentName)
 
-  var equipmentASObject={'id': req.route.path + '/' + equipmentInfo._id, 'objectType': 'equipment', 'displayName': equipmentInfo.name }
+  var equipmentASObject = {
+    'id': req.route.path + '/' + equipmentInfo._id,
+    'objectType': 'equipment',
+    'displayName': equipmentInfo.name
+  }
 
   equipment.toggleState(equipmentInfo)
 
@@ -69,18 +84,29 @@ app.get('/checkout/:equipmentName', function (req, res, next) {
   as.checkOutOfEquipment(actor, object)
   next()
 }, function (req, res) {
-  res.send('You are no longer using equipment.')
+  res.render('index.html')
 })
 
 // Recommends equipment to people
 // TODO: should eventually be a post, handled by some kind of database logic
-app.get('/recommendation/:equipmentName', function (req, res) {
+app.post('/recommendation/:equipmentName', function (req, res) {
   var equipmentName = req.params.equipmentName
   var equipmentInfo = equipment.find(equipmentName)
 
-  var actor = JSON.stringify({'id': '007', 'objectType': 'person', 'displayName': 'Ricky' })
-  var object = JSON.stringify({'id': __dirname + equipmentInfo._id, 'objectType': 'equipment', 'displayName': equipmentName })
-  var target = JSON.stringify({'objectType': 'event', 'displayName': 'workout'})
+  var actor = JSON.stringify({
+    'id': '007',
+    'objectType': 'person',
+    'displayName': 'Ricky'
+  })
+  var object = JSON.stringify({
+    'id': __dirname.join(equipmentInfo._id),
+    'objectType': 'equipment',
+    'displayName': equipmentName
+  })
+  var target = JSON.stringify({
+    'objectType': 'event',
+    'displayName': 'workout'
+  })
 
   as.recommend(object, actor, target)
   twilio.send(equipmentInfo)

@@ -12,8 +12,18 @@
 </head>
 
 <body class="indigo-darken-2">
-  <div class="display-flex-center">
-    <h1 class="white-text center"> Welcome to the IoT Gym! </h1>
+  <div class="display-flex-center col s12 m6">
+    <p class="white-text center">
+      Enjoy working out! Once you're done, just click the button below to check out of {{ name }}.
+    </p>
+    <br />
+    <form action="/checkout/{{ name }}" method="post">
+      <button name="platoSubscription" class="waves-effect waves-pink btn pink"> I'm done! </button>
+    </form>
+    <br />
+    <p class="white-text center">
+      PS: did we mention that you had EXCELLENT form today?
+    </p>
   </div>
   <!--Import jQuery before materialize.js-->
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
