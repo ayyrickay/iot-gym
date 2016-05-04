@@ -7,6 +7,7 @@ var equipment = require('./models/equipment')
 var twilio = require('./models/twilio')
 
 var app = express()
+var port = process.env.PORT || 8080
 
 app.engine('html', mustacheExpress())
 
@@ -114,6 +115,6 @@ app.post('/recommendation/:equipmentName', function (req, res) {
   res.send('Recommended ' + equipmentInfo.name)
 })
 
-app.listen(8080, function () {
-  console.log('Listening on port 8080...')
+app.listen(port, function () {
+  console.log('Listening on port', port)
 })
