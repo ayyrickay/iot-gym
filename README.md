@@ -9,9 +9,9 @@ This document presents and defines object types and verbs for Activity streams i
 
 First, install all dependencies using `npm install`. Use `npm start` to run the application.
 
-### Twilio setup
+### twilio setup
 
-To start using Twilio, use the .env file - and for any lost souls who look at this project and don't have the .env file, create one in the iot-gym directory, and include your Twilio auth token and SID. .env should look like:
+To start using Twilio, use the .env file in our project submission - and for any lost souls who look at this project and don't have the .env file, create one in the iot-gym directory, and include your Twilio auth token and SID. .env should look like:
 
 ```
 TWILIO_AUTH: #################################
