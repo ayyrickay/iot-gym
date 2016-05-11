@@ -18,7 +18,7 @@ TWILIO_AUTH: #################################
 TWILIO_SID:  #################################
 ```
 
-Finally, once the server is running, feel free to test the Twilio recommendation by changing `to` in the JSON field to the number of your choice. Then, using localhost and the current port of the application, you can POST the recommendation using CURL or a tool like PostMan. You could probably also just change it to a GET request. ;)
+Finally, once the server is running, feel free to test the Twilio recommendation by changing the `to` to in the JSON of `models\twilio.js` to the number of your choice. Then, using localhost and the current port of the application, you can POST the recommendation using CURL or a tool like PostMan. You could probably also just change it to a GET request. ;)
 
 ## Verbs
 
