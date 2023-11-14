@@ -62,7 +62,7 @@ Indicates that the actor has checked-out with the object. For example, a person 
   }
 ```
 
-###recommend
+### recommend
 Indicates that the actor recommends itself to the object. For example, a treadmill will recommend itself to a person who needs cardio.
 ```
 {
