@@ -27,7 +27,7 @@ Finally, once the server is running, feel free to test the Twilio recommendation
 
 
 
-###check-in
+### check-in
 Indicates that the actor has checked-in with the object. For example, a person checks in with a piece of exercise equipment to indicate they are using the equipment.
 ```
 {
