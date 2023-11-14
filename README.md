@@ -1,5 +1,8 @@
 # Social Gym ASDL Schema
 
+```
+This repository is archived as of 14 November, 2023.
+```
 
 ## Introduction
 This document presents and defines object types and verbs for Activity streams in the IoT Exercise App which will be developed for INFO 290: Internet of Things at the University of California, Berkeley
